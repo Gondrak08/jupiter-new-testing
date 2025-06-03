@@ -1,0 +1,128 @@
+@import "../../variables.scss";
+
+.select {
+  position: relative;
+  height: 40px;
+  min-width: 80px;
+  padding: 0 28px 0 14px;
+  border: 1px solid $black;
+  border-radius: 14px;
+  color: $inactive;
+  max-width: 150px;
+  cursor: pointer;
+  text-align: start;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: $inactive;
+
+  transition: all 0.3s;
+
+  span {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    &.label {
+      display: none;
+    }
+  }
+  &.active {
+    color: $black;
+    span {
+      &.label {
+        display: block;
+        position: absolute;
+        top: -5px;
+        transform: translateY(-100%);
+        color: $black;
+        font-size: 12px;
+        left: 5px;
+      }
+    }
+  }
+  &.empty {
+    span {
+      color: #00000040;
+    }
+  }
+
+  svg {
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+  }
+  &:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+    svg {
+      path {
+        stroke: $primary-color;
+      }
+    }
+  }
+  &__list {
+    position: absolute;
+    left: 50%;
+    min-width: 120px;
+    width: fit-content;
+    bottom: 40px;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 2;
+    visibility: hidden;
+    background: $white;
+    padding: 10px 0;
+    border-radius: 20px;
+    border: 1px solid $black;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: all 0.3s;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    &-item {
+      color: $inactive;
+      transition: all 0.3s;
+      font-size: 20px;
+      padding: 7.5px 20px;
+      white-space: nowrap;
+      text-align: center;
+      &:hover {
+        color: $primary-color;
+      }
+      &.active {
+        color: $black;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .select {
+    // height: 40px;
+    // font-size: 12px;
+    // padding: 0 28px 0 14px;
+    // min-width: 70px;
+
+    // svg {
+    //   right: 14px;
+    //   width: 8px;
+    //   object-fit: contain;
+    // }
+    &__list {
+      min-width: 70px;
+      width: 100%;
+
+      &-item {
+        white-space: wrap;
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+    }
+  }
+}

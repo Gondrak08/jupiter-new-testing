@@ -1,0 +1,97 @@
+@import "../../../variables.scss";
+
+.step {
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px;
+
+  &__title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    animation-delay: 100ms;
+  }
+
+  &__cars {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 10px;
+    animation-delay: 200ms;
+  }
+  &__actions {
+    position: relative;
+    display: flex;
+    // justify-content: space-between;
+    // max-width: 400px;
+    justify-content: center;
+    width: 100%;
+  }
+  &__backButton {
+    padding: 10px;
+    background-color: $confirm2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation-delay: 500ms;
+    &:hover {
+      background-color: $confirm1;
+    }
+  }
+  &__btn {
+    align-self: center;
+    animation-delay: 500ms;
+    background-color: $confirm2 !important;
+    border-radius: 15px;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+  }
+  &__selects {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 35px;
+    animation-delay: 400ms;
+    &-item {
+      width: fit-content;
+      flex: 1;
+      &.sm {
+        flex: 0.4;
+      }
+      &.md {
+        flex: 0.6;
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .step {
+    padding: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 700px) {
+  .step {
+    &__title {
+      margin-bottom: 15px;
+    }
+    &__cars {
+      gap: 0;
+      margin-bottom: 25px;
+    }
+    &__selects {
+      margin-bottom: 40px;
+      gap: 10px;
+    }
+  }
+}

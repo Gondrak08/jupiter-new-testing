@@ -1,0 +1,23 @@
+@import "../../variables.scss";
+
+.react-calendar {
+  overflow: hidden;
+  border: 0 !important;
+  &__tile {
+    outline: none;
+    &--active {
+      background: $primary-color !important;
+    }
+    &--now:not(.react-calendar__tile--active) {
+      background: transparent !important;
+    }
+    &:hover {
+      background: rgba($black, $alpha: 0.25);
+
+      color: $white;
+    }
+    &:focus {
+      background: $primary-color !important;
+    }
+  }
+}

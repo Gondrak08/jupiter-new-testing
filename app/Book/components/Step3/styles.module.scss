@@ -1,0 +1,35 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px;
+
+  &__btn {
+    align-self: center;
+  }
+  &__car {
+    animation-delay: 100ms;
+  }
+  &__title {
+    font-size: 30px;
+    margin: 10px 0;
+    animation-delay: 200ms;
+  }
+
+  &__btn {
+    animation-delay: 600ms;
+  }
+}
+
+@media (max-width: 1400px) {
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 700px) {
+  .step {
+    &__title {
+      font-size: 20px;
+    }
+  }
+}

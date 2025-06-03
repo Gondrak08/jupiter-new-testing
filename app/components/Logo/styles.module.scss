@@ -1,0 +1,61 @@
+@import "../../variables.scss";
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-weight: 500;
+  color: $primary-color;
+  font-size: 17px;
+
+  &.white {
+    svg {
+      path {
+        fill: $white;
+      }
+    }
+    color: $white;
+  }
+
+  &.h-lg {
+    font-size: 33px;
+    svg {
+      height: 60px;
+    }
+  }
+
+  svg {
+    height: 56px;
+    object-fit: contain;
+    width: fit-content;
+    path {
+      fill: $primary-color;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .logo {
+    &.h-lg {
+      font-size: 35px;
+    }
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .logo {
+    &.primary {
+      font-size: 15px;
+      gap: 10px;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

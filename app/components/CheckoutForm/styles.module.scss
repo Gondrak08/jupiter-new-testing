@@ -1,0 +1,79 @@
+@import "../../variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  &__btn {
+    align-self: center;
+    background-color: $confirm2 !important;
+  }
+}
+
+.step {
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  &__stripe {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__inputs {
+    animation-delay: 400ms;
+
+    margin-bottom: 70px;
+    &-item {
+      flex: 1;
+      &.md {
+        flex: 3;
+      }
+      &.sm {
+        flex: 1.5;
+      }
+    }
+    &-card {
+      flex-grow: 2;
+      position: relative;
+    }
+  }
+  &__actions {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 40px;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+  }
+  &__backButton {
+    padding: 10px;
+    background-color: $confirm2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation-delay: 500ms;
+    &:hover {
+      background-color: $confirm1;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .step {
+    &__row {
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    &__inputs {
+      margin-bottom: 30px;
+    }
+  }
+}

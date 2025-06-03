@@ -1,0 +1,66 @@
+@import "../../../variables.scss";
+
+.car {
+  cursor: pointer;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 37px;
+  transition: all 0.3s;
+  margin: 0 -14px;
+  width: calc(100% + 28px);
+  border-left: 3px solid transparent;
+
+  &:hover {
+    background: rgba(0, 35, 80, 0.1);
+  }
+  &.active {
+    background: rgba(0, 35, 80, 0.1);
+    border-left: 3px solid rgb(0, 35, 80);
+  }
+  &__content {
+    flex: 1;
+    p {
+      font-size: 20px;
+      font-weight: 500;
+      b {
+        font-weight: 700;
+        color: $black;
+      }
+    }
+    span {
+      font-weight: 300;
+    }
+  }
+  &__price {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 700px) {
+  .car {
+    gap: 25px;
+
+    padding: 15px 0;
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+    img {
+      height: 36px;
+      width: fit-content;
+      object-fit: contain;
+    }
+    &__content {
+      p {
+        font-size: 18px;
+      }
+      span {
+        font-size: 8px;
+      }
+    }
+    &__price {
+      font-size: 18px;
+    }
+  }
+}

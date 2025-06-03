@@ -1,0 +1,16 @@
+.map {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: 565px;
+}
+
+@media (max-width: 1200px) {
+  .map {
+    bottom: 0;
+    aspect-ratio: unset;
+  }
+}

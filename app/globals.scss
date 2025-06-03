@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "./variables.scss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  color: $black;
+  background: $white;
+
+  display: flex;
+  flex-direction: column;
+  main {
+    flex: 1;
+  }
+}
+
+.container {
+  max-width: 1760px;
+  width: 100%;
+  padding: 0 6.77vw;
+  margin: 0 auto 90px;
+}
+
+@media (min-width: 1760px) {
+  .container {
+    padding: 0 130px;
+  }
+}
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 100px;
+  }
+}
+@media (max-width: 1000px) {
+  .container {
+    padding: 0 50px;
+  }
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+button {
+  outline: none;
+  background: none;
+  border: none;
+}
+
+.showOn {
+  animation: showOn 0.7s ease forwards;
+  transform: translateY(100vh);
+  opacity: 0;
+}
+
+@keyframes showOn {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.logo-img {
+  margin: 20px auto 80px;
+}
