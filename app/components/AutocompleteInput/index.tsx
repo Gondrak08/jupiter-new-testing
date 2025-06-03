@@ -28,7 +28,8 @@ const AutocompleteInput = ({
     setShow(true);
   };
   const onBlur = (): void => {
-    setShow(false);
+    setTimeout(() => setShow(false), 150);
+    // setShow(false);
   };
 
   // const getPlaceDetails = (placeId: string) => {
@@ -158,10 +159,10 @@ const AutocompleteInput = ({
             <div className={styles["select__list-item"]}>No Data</div>
           ) : (
             <div className={styles.select__list}>
-              {results.map((place) => (
+              {results.map((place, index) => (
                 <div
                   className={styles["select__list-item"]}
-                  key={place.place_id}
+                  key={place.place_id || place.description || index}
                   onMouseDown={() => {
                     console.log("click", onItemClick(place));
                   }}
