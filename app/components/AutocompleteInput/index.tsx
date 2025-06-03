@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { axiosInstance } from "@/app/utils";
+
 import { InputProps } from "./input.types";
 import styles from "./styles.module.scss";
 import { useDebounce } from "@/app/hooks";
@@ -28,53 +28,50 @@ const AutocompleteInput = ({
     setShow(true);
   };
   const onBlur = (): void => {
-    setTimeout(() => setShow(false), 150);
-    // setShow(false);
+    setShow(false);
   };
 
-  // const getPlaceDetails = (placeId: string) => {
-  //   console.log("getDetailsCall", placeId);
-  //   const service = new google.maps.places.PlacesService(
-  //     document.createElement("div"),
-  //   );
-  //   console.log("service", service);
-  //   service.getDetails(
-  //     {
-  //       placeId,
-  //       fields: ["geometry", "formatted_address", "name"],
-  //       sessionToken: sessionToken.current!,
-  //     },
-  //     (place, status) => {
-  //       if (
-  //         status === google.maps.places.PlacesServiceStatus.OK &&
-  //         place &&
-  //         place.formatted_address
-  //       ) {
-  //         onChoose({
-  //           ...place,
-  //           description: place.formatted_address,
-  //         } as any); // casting for compatibility
-  //         setSearch(place.formatted_address);
-  //       } else {
-  //         console.error("Error fetching place details:", status);
-  //       }
-  //     },
-  //   );
-  // };
+  const getPlaceDetails = (placeId: string) => {
+    console.log("getDetailsCall");
+    const service = new google.maps.places.PlacesService(
+      document.createElement("div"),
+    );
+    console.log("service", service);
+    service.getDetails(
+      {
+        placeId,
+        fields: ["geometry", "formatted_address", "name"],
+        sessionToken: sessionToken.current!,
+      },
+      (place, status) => {
+        console.log("quackquack:", place);
+        if (
+          status === google.maps.places.PlacesServiceStatus.OK &&
+          place &&
+          place.formatted_address
+        ) {
+          onChoose({
+            ...place,
+            description: place.formatted_address,
+          } as any); // casting for compatibility
+          setSearch(place.formatted_address);
+        } else {
+          console.error("Error fetching place details:", status);
+        }
+      },
+    );
+  };
 
   const onItemClick = (
     place: google.maps.places.AutocompletePrediction,
   ): void => {
-    console.log("place-->", place);
     setShow(false);
-    // getPlaceDetails(place.place_id);
-
+    console.log("place-->", place);
     onChoose(place);
-    setSearch(place.description);
+    // getPlaceDetails(place.place_id);
   };
 
-  const getPredictions = async () => {
-    console.log("");
+  const getPredictions = () => {
     if (!window.google || !window.google.maps) return;
     if (!sessionToken.current) {
       sessionToken.current = new google.maps.places.AutocompleteSessionToken();
@@ -84,44 +81,26 @@ const AutocompleteInput = ({
 
     setLoading(true);
     setEmptyError(false);
-    try {
-      setLoading(true);
-      setEmptyError(false);
-      const resp = await axiosInstance.post("includes/ajax/_booking2.php", {
-        method: "get_address",
-        params: { type: "address", search },
-      });
-      if (resp.data?.results) {
-        setResults(Object.values(resp.data.results));
-      } else {
-        setEmptyError(true);
-      }
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      setEmptyError(true);
-      console.log(`[getPredictions] error: ${e}`);
-    }
 
-    // service.getPlacePredictions(
-    //   {
-    //     input: search,
-    //     sessionToken: sessionToken.current,
-    //     componentRestrictions: { country: "us" }, // Optional
-    //   },
-    //   (predictions, status) => {
-    //     setLoading(false);
-    //     if (
-    //       status === google.maps.places.PlacesServiceStatus.OK &&
-    //       predictions
-    //     ) {
-    //       setResults(predictions);
-    //     } else {
-    //       setEmptyError(true);
-    //       setResults([]);
-    //     }
-    //   },
-    // );
+    service.getPlacePredictions(
+      {
+        input: search,
+        sessionToken: sessionToken.current,
+        componentRestrictions: { country: "us" }, // Optional
+      },
+      (predictions, status) => {
+        setLoading(false);
+        if (
+          status === google.maps.places.PlacesServiceStatus.OK &&
+          predictions
+        ) {
+          setResults(predictions);
+        } else {
+          setEmptyError(true);
+          setResults([]);
+        }
+      },
+    );
   };
 
   useDebounce(() => {
@@ -159,13 +138,11 @@ const AutocompleteInput = ({
             <div className={styles["select__list-item"]}>No Data</div>
           ) : (
             <div className={styles.select__list}>
-              {results.map((place, index) => (
+              {results.map((place) => (
                 <div
                   className={styles["select__list-item"]}
-                  key={place.place_id || place.description || index}
-                  onMouseDown={() => {
-                    console.log("click", onItemClick(place));
-                  }}
+                  key={place.place_id}
+                  onMouseDown={() => onItemClick(place)}
                 >
                   {place.description}
                 </div>
