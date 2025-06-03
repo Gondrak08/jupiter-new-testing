@@ -103,12 +103,14 @@ const Book = () => {
     cartype: CarType,
     values?: Partial<Form>,
   ): Promise<CarQuote | undefined> => {
-    console.log("starts-call");
+    console.log("starts-call ValidateBooking");
+    if (!window.google || !window.google.maps) return;
     try {
       const resp = await axiosInstance.post(`includes/ajax/_booking2.php`, {
         method: "validate_booking",
         params: getBookingRequestBody({ ...form, ...values }, cartype),
       });
+      console.log("validating-booking response:", resp);
       if (resp.data?.success) {
         const quoteResp = await axiosInstance.post(
           `includes/ajax/_booking_quote2.php`,
